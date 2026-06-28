@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>モノタス by MonotaRO</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif; background: #F2F2F2; min-height: 100vh; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner { width:16px;height:16px;border:2.5px solid #EEE;border-top-color:#CC0000;border-radius:50%;animation:spin .7s linear infinite; }
+input,button { font-family:inherit; }
+button { cursor:pointer; }
+</style>
+</head>
+<body>
+
+<div style="background:#CC0000;padding:10px 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;">
+  <img src="data:image/png;base64,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" alt="logo"
+    style="width:44px;height:44px;border-radius:50%;background:white;object-fit:cover;flex-shrink:0;" />
+  <div>
+    <div style="font-size:22px;font-weight:700;color:white;line-height:1.2;">モノタス</div>
+    <div style="font-size:11px;color:rgba(255,255,255,.75);">by MonotaRO — 止まらない一式を、先回りで。</div>
+  </div>
+  <span style="margin-left:auto;font-size:11px;background:rgba(255,255,255,.2);color:white;padding:3px 10px;border-radius:2px;">AI Beta</span>
+</div>
+
+<div style="max-width:700px;margin:0 auto;padding:20px 16px 48px;">
+  <div id="formCard" style="background:white;border-radius:3px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.1);">
+    <div style="background:#CC0000;padding:14px 20px;">
+      <div style="font-size:16px;font-weight:700;color:white;">一式を確認する</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.8);margin-top:3px;">目的と手持ちの商品を入力すると、現場で止まらない一式をAIが提示します</div>
+    </div>
+    <div style="padding:24px;">
+      <div style="margin-bottom:18px;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:7px;">
+          <label style="font-size:13px;font-weight:700;color:#222;">目的・やりたいこと</label>
+          <span style="font-size:10px;background:#CC0000;color:white;padding:1px 6px;border-radius:2px;">必須</span>
+        </div>
+        <input id="goal" type="text" placeholder="例：ドローンの試作機を組み立てたい"
+          style="width:100%;padding:10px 12px;border:1px solid #BBB;border-radius:2px;font-size:14px;outline:none;" />
+      </div>
+      <div style="margin-bottom:22px;">
+        <label style="display:block;font-size:13px;font-weight:700;color:#222;margin-bottom:7px;">
+          手持ちの商品
+          <span style="font-size:11px;color:#999;font-weight:400;margin-left:6px;">複数はカンマ区切り</span>
+        </label>
+        <input id="items" type="text" placeholder="例：フレームキット、ESC"
+          style="width:100%;padding:10px 12px;border:1px solid #BBB;border-radius:2px;font-size:14px;outline:none;" />
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <button id="submitBtn" onclick="doSubmit()"
+          style="background:#CC0000;color:white;border:none;padding:11px 28px;font-size:14px;font-weight:700;border-radius:2px;">
+          一式を確認する →
+        </button>
+        <div id="loadingDiv" style="display:none;align-items:center;gap:8px;">
+          <div class="spinner"></div>
+          <span id="loadingMsg" style="font-size:12px;color:#888;"></span>
+        </div>
+      </div>
+      <div id="errorDiv" style="display:none;margin-top:14px;padding:10px 14px;background:#FFF0F0;border:1px solid #FFBBBB;border-radius:2px;font-size:13px;color:#CC0000;"></div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid #EEE;">
+        <div style="font-size:12px;color:#AAA;margin-bottom:8px;">使用例</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <button onclick="fill('ドローンの試作機を組み立てたい','フレームキット、ESC')" style="font-size:12px;background:#F5F5F5;border:1px solid #DDD;padding:5px 12px;border-radius:2px;color:#0066CC;">ドローン試作</button>
+          <button onclick="fill('ショートドラマ撮影で長時間録音をしたい','Zoom F8n Pro')" style="font-size:12px;background:#F5F5F5;border:1px solid #DDD;padding:5px 12px;border-radius:2px;color:#0066CC;">録音機材セット</button>
+          <button onclick="fill('電気工事で壁コンセントを設置したい','電線 VVF 2mm')" style="font-size:12px;background:#F5F5F5;border:1px solid #DDD;padding:5px 12px;border-radius:2px;color:#0066CC;">電気工事</button>
+          <button onclick="fill('自動車のオイル交換をしたい','エンジンオイル 5W-30')" style="font-size:12px;background:#F5F5F5;border:1px solid #DDD;padding:5px 12px;border-radius:2px;color:#0066CC;">自動車整備</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="result" style="display:none;"></div>
+</div>
+
+<script>
+const MSGS=["レビューを参照しています...","必要なパーツを確認しています...","規格・互換性を照合しています...","注意点をまとめています..."];
+let msgTimer;
+
+function fill(g,i){document.getElementById("goal").value=g;document.getElementById("items").value=i;}
+
+function startLoading(){
+  let i=0;document.getElementById("loadingMsg").textContent=MSGS[0];
+  document.getElementById("loadingDiv").style.display="flex";
+  msgTimer=setInterval(()=>{i=(i+1)%MSGS.length;document.getElementById("loadingMsg").textContent=MSGS[i];},1800);
+}
+function stopLoading(){clearInterval(msgTimer);document.getElementById("loadingDiv").style.display="none";}
+
+function pb(p){
+  const bg=p==="必須"?"#CC0000":p==="推奨"?"#FF6600":"#E0E0E0",c=p==="あると便利"?"#666":"white";
+  return `<span style="font-size:11px;padding:2px 8px;border-radius:2px;font-weight:700;background:${bg};color:${c};">${p}</span>`;
+}
+function mb(m){
+  const bg=m==="あり"?"#E8F5E9":m==="要確認"?"#FFF8E1":"#F5F5F5";
+  const c=m==="あり"?"#2E7D32":m==="要確認"?"#E65100":"#999";
+  const b=m==="あり"?"1px solid #A5D6A7":m==="要確認"?"1px solid #FFCC80":"1px solid #DDD";
+  return `<span style="font-size:11px;padding:2px 8px;border-radius:2px;background:${bg};color:${c};border:${b};">モノタロウ ${m}</span>`;
+}
+
+function renderResult(d){
+  const parts=(d.parts||[]).map((p,i)=>
+    `<div style="padding:14px 18px;border-bottom:1px solid #F0F0F0;display:flex;gap:12px;">
+      <span style="font-size:11px;color:#CCC;flex-shrink:0;margin-top:4px;min-width:22px;font-weight:700;">${String(i+1).padStart(2,"0")}</span>
+      <div style="flex:1;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;">
+          <span style="font-size:14px;font-weight:700;color:#0066CC;">${p.name}</span>
+          ${pb(p.priority)} ${mb(p.monotaro)}
+        </div>
+        <div style="font-size:13px;color:#555;line-height:1.7;">${p.reason}</div>
+      </div>
+    </div>`).join("");
+
+  const warnings=(d.warnings||[]).map(w=>
+    `<div style="padding:12px 18px;border-bottom:1px solid #F5F5F5;display:flex;gap:10px;">
+      <span style="font-size:11px;font-weight:700;color:#E65100;background:#FFF3E0;border:1px solid #FFE0B2;padding:2px 7px;border-radius:2px;flex-shrink:0;margin-top:2px;">注意</span>
+      <span style="font-size:13px;color:#333;line-height:1.7;">${w}</span>
+    </div>`).join("");
+
+  const reviews=(d.reviews||[]).map(r=>
+    `<div style="padding:14px 18px;border-bottom:1px solid #F5F5F5;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="color:#FF6600;font-size:15px;">${"★".repeat(r.stars)}${"☆".repeat(5-r.stars)}</span>
+        <span style="font-size:13px;font-weight:700;color:#FF6600;">${r.stars}.0</span>
+        <span style="font-size:11px;color:#888;background:#F5F5F5;padding:2px 8px;border-radius:2px;">${r.meta}</span>
+      </div>
+      <div style="font-size:13px;color:#333;line-height:1.75;">${r.text}</div>
+    </div>`).join("");
+
+  document.getElementById("result").innerHTML=`
+    <div style="background:white;border-left:4px solid #CC0000;border-radius:3px;padding:16px 20px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);">
+      <div style="font-size:17px;font-weight:700;margin-bottom:6px;color:#111;">${d.title}</div>
+      <div style="font-size:13px;color:#555;line-height:1.75;">${d.summary}</div>
+    </div>
+    <div style="background:white;border-radius:3px;overflow:hidden;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);">
+      <div style="padding:11px 18px;background:#F7F7F7;border-bottom:1px solid #E8E8E8;display:flex;align-items:center;gap:8px;">
+        <span style="font-size:14px;font-weight:700;color:#111;">必要な一式</span>
+        <span style="font-size:12px;color:#AAA;">${(d.parts||[]).length}点</span>
+      </div>${parts}
+    </div>
+    <div style="background:white;border-radius:3px;overflow:hidden;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);">
+      <div style="padding:11px 18px;background:#F7F7F7;border-bottom:1px solid #E8E8E8;font-size:14px;font-weight:700;color:#111;">現場で止まる前に知っておくこと</div>${warnings}
+    </div>
+    <div style="background:white;border-radius:3px;overflow:hidden;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);">
+      <div style="padding:11px 18px;background:#F7F7F7;border-bottom:1px solid #E8E8E8;font-size:14px;font-weight:700;color:#111;">モノタロウ レビューより</div>${reviews}
+    </div>
+    <div style="background:white;border-radius:3px;padding:16px 20px;box-shadow:0 1px 3px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+      <div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:3px;">「${d.title}」をモノタロウで揃える</div>
+        <div style="font-size:12px;color:#AAA;">2,888万点の品揃え ／ 翌日配送対応</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button onclick="window.open('https://www.monotaro.com/s/?c=&q='+encodeURIComponent('${d.title}'),'_blank')"
+          style="background:#FF6600;color:white;border:none;padding:10px 22px;font-size:14px;font-weight:700;border-radius:2px;">
+          モノタロウで探す →
+        </button>
+        <button onclick="resetForm()"
+          style="background:none;border:1px solid #CCC;padding:9px 16px;font-size:13px;color:#555;border-radius:2px;">
+          もう一度入力する
+        </button>
+      </div>
+    </div>`;
+
+  document.getElementById("result").style.display="block";
+  document.getElementById("formCard").style.display="none";
+  document.getElementById("result").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function resetForm(){
+  document.getElementById("result").style.display="none";
+  document.getElementById("result").innerHTML="";
+  document.getElementById("formCard").style.display="block";
+  document.getElementById("goal").value="";
+  document.getElementById("items").value="";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function doSubmit(){
+  const goal=document.getElementById("goal").value.trim();
+  const items=document.getElementById("items").value.trim();
+  if(!goal) return;
+  document.getElementById("submitBtn").disabled=true;
+  document.getElementById("errorDiv").style.display="none";
+  startLoading();
+  try{
+    const res=await fetch("/api/ask",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({goal,items})
+    });
+    const text=await res.text();
+    let data;
+    try{data=JSON.parse(text);}catch(e){throw new Error("サーバーエラー: "+text.slice(0,80));}
+    if(data.error) throw new Error(data.error);
+    renderResult(data);
+  }catch(e){
+    document.getElementById("errorDiv").textContent="エラー: "+e.message;
+    document.getElementById("errorDiv").style.display="block";
+  }finally{
+    stopLoading();
+    document.getElementById("submitBtn").disabled=false;
+  }
+}
+
+document.getElementById("goal").addEventListener("keydown",e=>{if(e.key==="Enter")doSubmit();});
+document.getElementById("items").addEventListener("keydown",e=>{if(e.key==="Enter")doSubmit();});
+</script>
+</body>
+</html>
